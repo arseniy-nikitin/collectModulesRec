@@ -16,9 +16,9 @@
             let
               inherit (builtins)
                 readDir
-                hasSuffix
                 head;
               inherit (nixpkgs.lib)
+                hasSuffix
                 splitString
                 foldl
                 mapAttrsToList;
@@ -39,12 +39,6 @@
               modules = foldl (acc: moduleSet: acc // moduleSet) {} processed;
             in
             modules;
-        };
-
-        overlays.default = final: prev: {
-          lib = prev.lib // {
-            collectModulesRec = self.lib.collectModulesRec;
-          };
         };
       };
     };
