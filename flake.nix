@@ -20,6 +20,7 @@
               inherit (nixpkgs.lib)
                 hasSuffix
                 splitString
+                concatMapAttrs
                 foldl
                 mapAttrsToList;
               entries = readDir dir;
@@ -35,8 +36,10 @@
                   { "${getName obj}" = import "${dir}/${obj}"; }
                 else
                   {};
-              processed = mapAttrsToList process entries;
-              modules = foldl (acc: moduleSet: acc // moduleSet) {} processed;
+
+              modules = concatMapAttrs process entries;
+              #processed = mapAttrsToList process entries;
+              #modules = foldl (acc: moduleSet: acc // moduleSet) {} processed;
             in
             modules;
         };
