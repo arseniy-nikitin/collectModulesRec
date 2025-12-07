@@ -26,7 +26,7 @@
               process = obj: type:
                 let
                   isDirectory = type == "directory";
-                  isNixFile = type == "regular" && hasSuffix ".nix";
+                  isNixFile = type == "regular" && hasSuffix ".nix" obj;
                   getName = file: head (splitString "." file);
                 in
                 if isDirectory then
