@@ -11,7 +11,7 @@
       systems = [ "x86_64-linux" ];
       flake = {
         overlays.default = final: prev: {
-          dend = prev.lib // rec {
+          lib = prev.lib // rec {
             collectModulesRec = dir:
               let
                 inherit (builtins)
